@@ -207,3 +207,18 @@ footer { background: #333; color: white; text-align: center; padding: 20px; marg
     line-height: 1.6;
 }
 
+/* Fotoğraf Hareket Efekti */
+.img-container {
+    overflow: hidden; /* Resim büyüdüğünde kutunun dışına taşmasın */
+    border-radius: 8px; /* Kenarları yuvarlak tutar */
+}
+
+.img-container img {
+    transition: transform 0.5s ease; /* Hareketin ne kadar sürede (0.5 saniye) ve ne kadar yumuşak olacağını belirler */
+    width: 100%;
+    display: block;
+}
+
+.img-container:hover img {
+    transform: scale(1.15); /* Fareyle üzerine gelince resmi %15 büyütür */
+}
