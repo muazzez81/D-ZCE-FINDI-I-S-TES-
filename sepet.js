@@ -9,7 +9,7 @@ function sepeteEkle(ad, fiyat) {
         sepet.push({ ad: ad, fiyat: parseInt(fiyat), adet: 1 });
     }
     sepetiGuncelle();
-    console.log("Ürün eklendi:", ad); // Tarayıcı konsolunda kontrol için
+    console.log("Ürün eklendi:", ad);
 }
 
 function miktarAzalt(index) {
@@ -72,6 +72,7 @@ function siparisVer() {
         return;
     }
 
+    // FORM BİLGİLERİ
     const formID = "1FAIpQLSckeDlZKUpiSJGDXUlXcWTysxuGuxwZcPc6WaXAJRM4BrJbUQ"; 
     const urunDetay = sepet.map(u => `${u.ad} (${u.adet} Adet)`).join(", ");
     const postUrl = `https://docs.google.com/forms/d/e/${formID}/formResponse`;
@@ -81,11 +82,12 @@ function siparisVer() {
     gizliForm.action = postUrl;
     gizliForm.target = 'gizli_iframe';
 
+    // SENİN FORMUNDAKİ GÜNCEL ENTRY NUMARALARI
     const alanlar = {
-        "entry.2069695679": ad,         
-        "entry.1018861343": adres,      
-        "entry.1353130456": urunDetay,  
-        "entry.1983802554": toplam      
+        "entry.2069695679": ad,         // Müşteri Ad Soyad
+        "entry.1018861343": adres,      // Adres
+        "entry.1353130456": urunDetay,  // Sipariş Detayı
+        "entry.1983802554": toplam       // Toplam Tutar
     };
 
     for (let key in alanlar) {
@@ -96,6 +98,7 @@ function siparisVer() {
         gizliForm.appendChild(input);
     }
 
+    // Görünmez iframe (Sayfa yenilenmeden veriyi göndermek için)
     let iframe = document.getElementById('gizli_iframe');
     if (!iframe) {
         iframe = document.createElement('iframe');
@@ -108,6 +111,7 @@ function siparisVer() {
     document.body.appendChild(gizliForm);
     gizliForm.submit();
 
+    // WhatsApp Mesajı
     let mesaj = `*YENİ SİPARİŞ*%0A*Müşteri:* ${ad}%0A*Adres:* ${adres}%0A*Ürünler:* ${urunDetay}%0A*Toplam:* ${toplam} TL`;
     
     setTimeout(() => {
