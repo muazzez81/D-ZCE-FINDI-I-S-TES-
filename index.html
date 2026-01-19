@@ -3,56 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fındık Sepeti | Düzce'den Taze Fındık</title>
+    <title>Fındık Sepeti | Düzce Sallar Mahallesi</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
-    <nav>
-        <div class="logo">Fındık<span>Sepeti</span></div>
-        <ul class="nav-links">
-            <li><a href="#urunler">Ürünler</a></li>
-            <li><a href="#iletisim">İletişim</a></li>
-            <li style="background: #e67e22; padding: 5px 15px; border-radius: 20px; cursor: pointer;">
-                <a href="javascript:void(0)" style="color: white; text-decoration: none; font-weight: bold;">
-                    <i class="fas fa-shopping-cart"></i> Sepetim (<span id="sepet-sayaci-menu">0</span>)
-                </a>
-            </li>
-        </ul>
+    <nav style="background:#2d5a27; color:white; padding:15px; text-align:center;">
+        <h2>Fındık Sepeti</h2>
     </nav>
 
-    <section id="urunler" style="padding: 50px 20px;">
-        <h2 style="text-align:center;">Ürünlerimiz</h2>
-        <div class="product-grid" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-            <div class="product-card" style="border: 1px solid #ddd; padding: 15px; border-radius: 10px; width: 250px; text-align: center;">
-                <img src="findik2.jpg" alt="Fındık" style="width: 100%; border-radius: 5px;">
+    <div style="padding: 20px; text-align: center;">
+        <h2>Ürünlerimiz</h2>
+        <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top:20px;">
+            <div style="border:1px solid #ddd; padding:15px; border-radius:10px; width:200px;">
+                <img src="findik2.jpg" style="width:100%;">
                 <h3>Kavrulmuş Fındık</h3>
                 <p>1000 TL (1 KG)</p>
-                <button class="sepete-ekle-btn" data-urun="Kavrulmuş Fındık (1 KG)" data-fiyat="1000" style="background: #e67e22; color: white; border: none; padding: 10px; width: 100%; cursor: pointer; font-weight: bold; border-radius: 5px;">Sepete Ekle</button>
+                <button class="sepete-ekle-btn" data-urun="Kavrulmuş Fındık (1 KG)" data-fiyat="1000" style="background:#e67e22; color:white; border:none; padding:10px; cursor:pointer; width:100%;">Sepete Ekle</button>
             </div>
-            <div class="product-card" style="border: 1px solid #ddd; padding: 15px; border-radius: 10px; width: 250px; text-align: center;">
-                <img src="findik8.jpg" alt="Çiğ Fındık" style="width: 100%; border-radius: 5px;">
+            <div style="border:1px solid #ddd; padding:15px; border-radius:10px; width:200px;">
+                <img src="findik8.jpg" style="width:100%;">
                 <h3>Çiğ İç Fındık</h3>
                 <p>450 TL (1 KG)</p>
-                <button class="sepete-ekle-btn" data-urun="Çiğ İç Fındık" data-fiyat="450" style="background: #e67e22; color: white; border: none; padding: 10px; width: 100%; cursor: pointer; font-weight: bold; border-radius: 5px;">Sepete Ekle</button>
+                <button class="sepete-ekle-btn" data-urun="Çiğ İç Fındık" data-fiyat="450" style="background:#e67e22; color:white; border:none; padding:10px; cursor:pointer; width:100%;">Sepete Ekle</button>
             </div>
         </div>
-    </section>
+    </div>
 
-    <div id="sepet-penceresi" style="position: fixed; bottom: 20px; right: 20px; width: 320px; background: white; border: 2px solid #e67e22; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); padding: 15px; z-index: 1000;">
+    <div id="sepet-penceresi" style="position: fixed; bottom: 20px; right: 20px; width: 300px; background: white; border: 2px solid #e67e22; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); padding: 15px; z-index: 1000;">
         <h3 style="margin-top:0;">Sepetim</h3>
         <ul id="sepet-listesi" style="list-style: none; padding: 0; max-height: 150px; overflow-y: auto;"></ul>
         <hr>
-        
-        <div id="musteri-bilgileri" style="margin-bottom: 10px;">
-            <input type="text" id="musteri-ad" placeholder="Adınız Soyadınız" style="width: 93%; margin-bottom: 5px; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
-            <textarea id="musteri-adres" placeholder="Teslimat Adresiniz" style="width: 93%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; height: 50px; font-family: sans-serif;"></textarea>
+        <div style="margin-bottom: 10px;">
+            <input type="text" id="musteri-ad" placeholder="Adınız Soyadınız" style="width: 93%; margin-bottom: 5px; padding: 8px; border: 1px solid #ddd;">
+            <textarea id="musteri-adres" placeholder="Teslimat Adresiniz" style="width: 93%; padding: 8px; border: 1px solid #ddd; height: 50px;"></textarea>
         </div>
-
         <p><strong>Toplam: <span id="toplam-tutar">0</span> TL</strong></p>
         <button onclick="siparisVer()" style="width: 100%; background: #25d366; color: white; border: none; padding: 12px; border-radius: 5px; font-weight: bold; cursor: pointer;">
-            <i class="fab fa-whatsapp"></i> Siparişi Tamamla
+            WhatsApp ile Siparişi Tamamla
         </button>
     </div>
 
