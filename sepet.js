@@ -1,120 +1,113 @@
-(function() {
-    let sepet = [];
-    const whatsappNo = "905327669102";
+let sepet = [];
 
-    // 1. SEPET PANELİ TASARIMI (CSS)
-    const style = document.createElement('style');
-    style.innerHTML = `
-        #sepet-paneli {
-            position: fixed; top: 80px; right: 20px;
-            width: 320px; background: white; border-radius: 12px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            z-index: 10001; display: none; border: 2px solid #e67e22;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden;
-        }
-        .sepet-ust { background: #e67e22; color: white; padding: 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
-        .sepet-liste { max-height: 250px; overflow-y: auto; padding: 15px; color: #333; }
-        .sepet-urun { display: flex; justify-content: space-between; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 8px; font-size: 14px; }
-        .sepet-toplam-alan { padding: 15px; background: #fff8f2; border-top: 1px solid #eee; text-align: right; }
-        .sepet-toplam-alan strong { font-size: 18px; color: #d35400; }
-        .wp-siparis-buton { background: #25d366; color: white; text-align: center; padding: 15px; cursor: pointer; border: none; width: 100%; font-size: 16px; font-weight: bold; display: block; transition: 0.3s; }
-        .wp-siparis-buton:hover { background: #1ebe57; }
-        #sepet-kapat-ikon { cursor: pointer; font-size: 20px; }
-    `;
-    document.head.appendChild(style);
+// Sepete Ürün Ekleme Fonksiyonu
+function sepeteEkle(ad, fiyat) {
+    // Ürün zaten sepette var mı kontrol et
+    const varolanUrun = sepet.find(item => item.ad === ad);
 
-    // 2. SEPET PANELİ HTML YAPISI
-    const sepetHtml = `
-        <div id="sepet-paneli">
-            <div class="sepet-ust">
-                <span>🛒 Sipariş Özetiniz</span>
-                <span id="sepet-kapat-ikon">×</span>
-            </div>
-            <div class="sepet-liste" id="sepet-icerik-listesi">
-                <p style="text-align:center; color:#999;">Sepetiniz henüz boş.</p>
-            </div>
-            <div class="sepet-toplam-alan">
-                Toplam: <strong id="sepet-toplam-tutar">0</strong> <strong>TL</strong>
-            </div>
-            <button class="wp-siparis-buton" id="wp-onay-buton">
-                <i class="fab fa-whatsapp"></i> Siparişi WhatsApp'la Bitir
-            </button>
-        </div>
-    `;
-    document.body.insertAdjacentHTML('beforeend', sepetHtml);
-
-    // Elementleri Tanımla
-    const panel = document.getElementById('sepet-paneli');
-    const liste = document.getElementById('sepet-icerik-listesi');
-    const toplamGosterge = document.getElementById('sepet-toplam-tutar');
-    const menuSayac = document.getElementById('sepet-sayaci-menu');
-
-    // 3. SEPETİ AÇ / KAPAT MANTIĞI
-    const sepetMenuButonu = document.getElementById('sepet-menu-item');
-    if(sepetMenuButonu) {
-        sepetMenuButonu.addEventListener('click', function(e) {
-            e.preventDefault();
-            panel.style.display = (panel.style.display === 'block') ? 'none' : 'block';
+    if (varolanUrun) {
+        varolanUrun.adet += 1;
+    } else {
+        sepet.push({
+            ad: ad,
+            fiyat: parseInt(fiyat),
+            adet: 1
         });
     }
+    sepetiGuncelle();
+}
 
-    document.getElementById('sepet-kapat-ikon').onclick = () => {
-        panel.style.display = 'none';
-    };
+// Miktarı Azaltma
+function miktarAzalt(index) {
+    if (sepet[index].adet > 1) {
+        sepet[index].adet -= 1;
+    } else {
+        urunSil(index);
+    }
+    sepetiGuncelle();
+}
 
-    // 4. SEPETE EKLEME FONKSİYONU
-    document.querySelectorAll('.sepete-ekle-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            const urunAd = this.getAttribute('data-urun');
-            const urunFiyat = parseInt(this.getAttribute('data-fiyat'));
+// Miktarı Artırma
+function miktarArtir(index) {
+    sepet[index].adet += 1;
+    sepetiGuncelle();
+}
 
-            sepet.push({ ad: urunAd, fiyat: urunFiyat });
-            
-            sepetiGuncelle();
-            panel.style.display = 'block'; // Ürün eklenince sepeti otomatik aç
-        });
+// Ürünü Tamamen Silme
+function urunSil(index) {
+    sepet.splice(index, 1);
+    sepetiGuncelle();
+}
+
+// Sepeti Görsel Olarak Güncelleme
+function sepetiGuncelle() {
+    const sepetListesi = document.getElementById("sepet-listesi");
+    const toplamTutarElement = document.getElementById("toplam-tutar");
+    const sepetSayaci = document.getElementById("sepet-sayaci-menu");
+    
+    if(!sepetListesi) return; // Eğer sepet sayfası açık değilse hata vermesin
+
+    sepetListesi.innerHTML = "";
+    let toplam = 0;
+    let toplamAdet = 0;
+
+    sepet.forEach((urun, index) => {
+        const urunToplam = urun.fiyat * urun.adet;
+        toplam += urunToplam;
+        toplamAdet += urunAdet;
+
+        const li = document.createElement("li");
+        li.style.display = "flex";
+        li.style.justifyContent = "space-between";
+        li.style.alignItems = "center";
+        li.style.padding = "10px";
+        li.style.borderBottom = "1px solid #eee";
+        
+        li.innerHTML = `
+            <div style="flex: 1;">
+                <strong>${urun.ad}</strong><br>
+                <small>${urun.fiyat} TL x ${urun.adet}</small>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <button onclick="miktarAzalt(${index})" style="background:#ddd; border:none; padding:5px 10px; cursor:pointer; border-radius:3px;">-</button>
+                <span>${urun.adet}</span>
+                <button onclick="miktarArtir(${index})" style="background:#ddd; border:none; padding:5px 10px; cursor:pointer; border-radius:3px;">+</button>
+                <button onclick="urunSil(${index})" style="background:#ff4757; color:white; border:none; padding:5px 10px; cursor:pointer; border-radius:3px; margin-left:10px;">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        `;
+        sepetListesi.appendChild(li);
     });
 
-    function sepetiGuncelle() {
-        // Menüdeki sayacı güncelle
-        if(menuSayac) menuSayac.innerText = sepet.length;
+    toplamTutarElement.innerText = toplam;
+    sepetSayaci.innerText = sepet.reduce((a, b) => a + b.adet, 0);
+}
 
-        // Listeyi temizle ve yeniden yaz
-        liste.innerHTML = '';
-        let toplam = 0;
-
-        if(sepet.length === 0) {
-            liste.innerHTML = '<p style="text-align:center; color:#999;">Sepetiniz henüz boş.</p>';
-        } else {
-            sepet.forEach((item) => {
-                toplam += item.fiyat;
-                liste.innerHTML += `
-                    <div class="sepet-urun">
-                        <span>${item.ad}</span>
-                        <strong>${item.fiyat} TL</strong>
-                    </div>
-                `;
-            });
-        }
-        toplamGosterge.innerText = toplam;
+// WhatsApp Mesajı Gönderme
+function siparisVer() {
+    if (sepet.length === 0) {
+        alert("Sepetiniz boş!");
+        return;
     }
 
-    // 5. WHATSAPP'A GÖNDERME
-    document.getElementById('wp-onay-buton').onclick = function() {
-        if (sepet.length === 0) {
-            alert("Lütfen önce ürün ekleyin.");
-            return;
-        }
+    let mesaj = "Merhaba, şu ürünleri sipariş vermek istiyorum:%0A";
+    sepet.forEach(urun => {
+        mesaj += `- ${urun.ad} (${urun.adet} Adet) - ${urun.fiyat * urun.adet} TL%0A`;
+    });
+    mesaj += `%0AToplam Tutar: ${document.getElementById("toplam-tutar").innerText} TL`;
 
-        let mesaj = "*Yeni Fındık Siparişi (Düzce'den):*\n\n";
-        sepet.forEach((item, index) => {
-            mesaj += `${index + 1}. ${item.ad} - ${item.fiyat} TL\n`;
+    const telefon = "905327669102";
+    window.open(`https://wa.me/${telefon}?text=${mesaj}`, "_blank");
+}
+
+// Sayfa yüklendiğinde butonları dinle
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".sepete-ekle-btn").forEach(buton => {
+        buton.addEventListener("click", () => {
+            const ad = buton.getAttribute("data-urun");
+            const fiyat = buton.getAttribute("data-fiyat");
+            sepeteEkle(ad, fiyat);
         });
-        mesaj += `\n*Toplam Tutar:* ${toplamGosterge.innerText} TL\n\nAdres ve kargo detayları için bilgi bekliyorum.`;
-
-        const wpLink = `https://wa.me/${whatsappNo}?text=${encodeURIComponent(mesaj)}`;
-        window.open(wpLink, '_blank');
-    };
-
-})();
+    });
+});
