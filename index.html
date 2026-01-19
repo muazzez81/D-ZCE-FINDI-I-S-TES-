@@ -2,11 +2,11 @@
 <html lang="tr">
 <head>
     <meta name="google-site-verification" content="395jCz7JGTdnWyUMq9KZLHgQQqaiwWcNXKii0LtKEjk" />
+    <meta name="google-site-verification" content="j-fb9B5S-nupVMDxHnp7S_W42oH8_f-vC-S9oR1858" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fındık Sepeti | Düzce'den Taze ve Doğal fındık</title>
     <meta name="description" content="Düzce Sallar Mahallesi'nden doğrudan üreticiden taze fındık. Çifte kavrulmuş, çiğ ve kabuklu fındık seçenekleriyle.">
-    <meta name="google-site-verification" content="j-fb9B5S-nupVMDxHnp7S_W42oH8_f-vC-S9oR1858" />
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -160,8 +160,16 @@
         <p style="text-align: center; padding: 20px;">&copy; 2026 Fındık Sepeti - Demiröz Ailesi. Tüm Hakları Saklıdır.</p>
     </footer>
 
+    <div id="sepet-penceresi" style="position: fixed; bottom: 20px; right: 20px; width: 300px; background: white; border: 2px solid #e67e22; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); padding: 15px; z-index: 1000;">
+        <h3 style="margin-top:0;">Sepetim</h3>
+        <ul id="sepet-listesi" style="list-style: none; padding: 0; max-height: 200px; overflow-y: auto;"></ul>
+        <hr>
+        <p><strong>Toplam: <span id="toplam-tutar">0</span> TL</strong></p>
+        <button onclick="siparisVer()" style="width: 100%; background: #25d366; color: white; border: none; padding: 10px; border-radius: 5px; font-weight: bold; cursor: pointer;">
+            WhatsApp ile Siparişi Tamamla
+        </button>
+    </div>
+
     <script src="sepet.js"></script>
 </body>
 </html>
-
-
