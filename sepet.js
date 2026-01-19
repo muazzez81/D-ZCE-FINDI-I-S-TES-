@@ -62,12 +62,18 @@ function sepetiGuncelle() {
     if(sepetSayaci) sepetSayaci.innerText = sepet.reduce((a, b) => a + b.adet, 0);
 }
 
-// 5. Sipariş Ver ve Kaydet (Senin istediğin fonksiyon)
+// 5. Sipariş Ver ve Kaydet (GÜNCELLENMİŞ WHATSAPP KODU BURADA)
 function siparisVer() {
-    const ad = document.getElementById("musteri-ad").value;
-    const adres = document.getElementById("musteri-adres").value;
-    const toplamTutar = document.getElementById("toplam-tutar").innerText;
+    // 1. Bilgileri Al
+    const adInput = document.getElementById("musteri-ad");
+    const adresInput = document.getElementById("musteri-adres");
+    const toplamTutarElement = document.getElementById("toplam-tutar");
 
+    const ad = adInput ? adInput.value.trim() : "";
+    const adres = adresInput ? adresInput.value.trim() : "";
+    const toplamTutar = toplamTutarElement ? toplamTutarElement.innerText : "0";
+
+    // 2. Kontrolleri Yap
     if (sepet.length === 0) {
         alert("Sepetiniz boş!");
         return;
@@ -77,6 +83,7 @@ function siparisVer() {
         return;
     }
 
+    // 3. Google Form Kaydı (Arka Planda)
     const formID = "1HI342ngxVLPkw1C9KQOHQJtEIYSVDkUxIJsAiSF4qnU";
     let urunDetaylari = sepet.map(u => `${u.ad} (${u.adet} Adet)`).join(", ");
 
@@ -86,15 +93,27 @@ function siparisVer() {
         `entry.1065046570=${encodeURIComponent(urunDetaylari)}&` + 
         `entry.839337160=${encodeURIComponent(toplamTutar)}&submit=Submit`;
 
-    fetch(googleFormUrl, { mode: 'no-cors' });
+    // Kaydı gönder ama WhatsApp'ı bekletme
+    fetch(googleFormUrl, { mode: 'no-cors' }).catch(e => console.log("Form hatası:", e));
 
-    let mesaj = `*YENİ SİPARİŞ*%0A%0A*Müşteri:* ${ad}%0A*Adres:* ${adres}%0A--------------------------%0A`;
+    // 4. WhatsApp Mesajını Hazırla
+    let mesaj = `*YENİ SİPARİŞ*%0A%0A`;
+    mesaj += `*Müşteri:* ${ad}%0A`;
+    mesaj += `*Adres:* ${adres}%0A`;
+    mesaj += `--------------------------%0A`;
+    
     sepet.forEach(urun => {
         mesaj += `- ${urun.ad} (${urun.adet} Adet) - ${urun.fiyat * urun.adet} TL%0A`;
     });
-    mesaj += `--------------------------%0A*Toplam:* ${toplamTutar} TL`;
+    
+    mesaj += `--------------------------%0A`;
+    mesaj += `*Toplam Tutar:* ${toplamTutar} TL`;
 
-    window.open(`https://wa.me/905327669102?text=${mesaj}`, "_blank");
+    // 5. WhatsApp'ı Aç (En Güvenli Yöntem)
+    const telefon = "905327669102";
+    const whatsappUrl = `https://wa.me/${telefon}?text=${mesaj}`;
+    
+    window.location.href = whatsappUrl;
 }
 
 // 6. Sayfa Yüklendiğinde Butonları Aktif Et
