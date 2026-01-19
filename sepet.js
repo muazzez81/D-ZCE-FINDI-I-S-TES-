@@ -52,21 +52,21 @@ function siparisVer() {
     const formID = "1HI342ngxVLPkw1C9KQOHQJtEIYSVDkUxIJsAiSF4qnU"; 
     const urunDetay = sepet.map(u => `${u.ad} (${u.adet} Adet)`).join(", ");
     
-    // GOOGLE FORM POST URL
+    // Google Form Gönderim Linki
     const postUrl = `https://docs.google.com/forms/d/e/${formID}/formResponse`;
 
-    // Yeni bir gizli form oluşturuyoruz (Tarayıcı engeline takılmamak için en sağlam yol)
+    // Gizli Form Oluşturma
     const gizliForm = document.createElement('form');
     gizliForm.method = 'POST';
     gizliForm.action = postUrl;
-    gizliForm.target = 'gizli_iframe'; // Çıktıyı görünmez pencereye at
+    gizliForm.target = 'gizli_iframe';
 
-    // Form Alanlarını Eşleştirme
+    // SENİN FORMUNA ÖZEL GÜNCEL ENTRY ID'LERİ
     const alanlar = {
-        "entry.2005620554": ad,
-        "entry.1045781291": adres,
-        "entry.1065046570": urunDetay,
-        "entry.839337160": toplam
+        "entry.2005620554": ad,          // 1. Soru: Müşteri Ad Soyad
+        "entry.1045781291": adres,       // 2. Soru: Adres
+        "entry.1065046570": urunDetay,   // 3. Soru: Sipariş Detayı
+        "entry.839337160": toplam        // 4. Soru: Toplam Tutar
     };
 
     for (let key in alanlar) {
@@ -77,7 +77,7 @@ function siparisVer() {
         gizliForm.appendChild(input);
     }
 
-    // Görünmez pencereyi (iframe) oluştur
+    // Görünmez İframe Kontrolü
     let iframe = document.getElementById('gizli_iframe');
     if (!iframe) {
         iframe = document.createElement('iframe');
@@ -88,7 +88,7 @@ function siparisVer() {
     }
 
     document.body.appendChild(gizliForm);
-    gizliForm.submit(); // Veriyi gönder!
+    gizliForm.submit();
 
     // WhatsApp Mesajı
     let mesaj = `*YENİ SİPARİŞ*%0A*Müşteri:* ${ad}%0A*Adres:* ${adres}%0A*Ürünler:* ${urunDetay}%0A*Toplam:* ${toplam} TL`;
