@@ -49,7 +49,8 @@ function siparisVer() {
         return;
     }
 
-    const formID = "1HI342ngxVLPkw1C9KQOHQJtEIYSVDkUxIJsAiSF4qnU"; 
+    // SENİN FORMUNUN BİLGİLERİ
+    const formID = "1FAIpQLSd62Z-NEKF5tuoY5hNniiE31dpyUqM58iO9_b2g6bKmVlRFJQ"; 
     const urunDetay = sepet.map(u => `${u.ad} (${u.adet} Adet)`).join(", ");
     
     // Google Form Gönderim Linki
@@ -61,12 +62,12 @@ function siparisVer() {
     gizliForm.action = postUrl;
     gizliForm.target = 'gizli_iframe';
 
-    // SENİN FORMUNA ÖZEL GÜNCEL ENTRY ID'LERİ
+    // SENİN FORMUNDAKİ GERÇEK NUMARALAR (BUNLARI SENİN LİNKİNDEN BULDUM)
     const alanlar = {
-        "entry.2005620554": ad,          // 1. Soru: Müşteri Ad Soyad
-        "entry.1045781291": adres,       // 2. Soru: Adres
-        "entry.1065046570": urunDetay,   // 3. Soru: Sipariş Detayı
-        "entry.839337160": toplam        // 4. Soru: Toplam Tutar
+        "entry.289456578": ad,          // Müşteri Ad Soyad
+        "entry.1705663673": adres,      // Adres
+        "entry.1353130456": urunDetay,  // Sipariş Detayı
+        "entry.1983802554": toplam       // Toplam Tutar
     };
 
     for (let key in alanlar) {
