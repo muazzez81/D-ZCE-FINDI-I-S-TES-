@@ -88,28 +88,30 @@
 
     <section id="hakkimizda" style="padding: 80px 10%; background-color: #fff;">
         <h2 class="section-title">Hikayemiz</h2>
-        <p><strong>Düzce'nin Sallar Mahallesi'nden DEMİRÖZ ailesi olarak</strong> nesillerdir devam eden fındık tarımı tecrübemizi doğrudan sofranıza sunuyoruz.</p>
+        <p><strong>Düzce'nin Sallar Mahallesi'nden DEMİRÖZ ailesi olarak...</strong></p>
     </section>
 
-    <div id="sepet-penceresi" style="display: none; position: fixed; bottom: 80px; right: 20px; width: 300px; background: white; border: 2px solid #e67e22; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); padding: 15px; z-index: 1000;">
-        <h3 style="margin:0 0 10px 0;">Sepetim <span onclick="sepetiAcKapat()" style="float:right; cursor:pointer;">&times;</span></h3>
-        <ul id="sepet-listesi" style="list-style: none; padding: 0; max-height: 200px; overflow-y: auto;"></ul>
-        <hr>
-        <input type="text" id="musteri-ad" placeholder="Adınız" style="width: 90%; margin-bottom: 5px; padding: 5px;">
-        <textarea id="musteri-adres" placeholder="Adresiniz" style="width: 90%; margin-bottom: 5px; padding: 5px;"></textarea>
-        <p><strong>Toplam: <span id="toplam-tutar">0</span> TL</strong></p>
-        <button onclick="siparisVer()" style="width: 100%; background: #25d366; color: white; border: none; padding: 10px; cursor: pointer; border-radius: 5px;">Siparişi WhatsApp ile Gönder</button>
-    </div>
+    <section id="iletisim" style="padding: 80px 10%; background-color: #f1f1f1;">
+        <h2 class="section-title">İletişim</h2>
+        <p>WhatsApp: 0532 766 91 02</p>
+    </section>
 
-    <div onclick="sepetiAcKapat()" style="position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; background: #e67e22; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 999; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
-        <i class="fas fa-shopping-basket"></i>
+    <div id="sepet-penceresi" style="display: none; position: fixed; bottom: 20px; right: 20px; width: 320px; background: white; border: 2px solid #e67e22; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); padding: 15px; z-index: 1000;">
+        <h3 style="margin-top:0;">Sepetim <span onclick="sepetiAcKapat()" style="float:right; cursor:pointer;">&times;</span></h3>
+        <ul id="sepet-listesi" style="list-style: none; padding: 0; max-height: 150px; overflow-y: auto;"></ul>
+        <hr>
+        <input type="text" id="musteri-ad" placeholder="Adınız Soyadınız" style="width: 93%; margin-bottom: 5px; padding: 8px;">
+        <textarea id="musteri-adres" placeholder="Adresiniz" style="width: 93%; padding: 8px; height: 50px;"></textarea>
+        <p><strong>Toplam: <span id="toplam-tutar">0</span> TL</strong></p>
+        <button onclick="siparisVer()" style="width: 100%; background: #25d366; color: white; border: none; padding: 12px; border-radius: 5px; font-weight: bold; cursor: pointer;">WhatsApp ile Siparişi Tamamla</button>
     </div>
 
     <script>
-        // Sepeti açıp kapatan fonksiyon
+        // Sadece sepeti açan-kapatan basit fonksiyon
         function sepetiAcKapat() {
             var s = document.getElementById("sepet-penceresi");
-            s.style.display = (s.style.display === "none" || s.style.display === "") ? "block" : "none";
+            if (s.style.display === "none") { s.style.display = "block"; } 
+            else { s.style.display = "none"; }
         }
     </script>
     <script src="sepet.js"></script>
