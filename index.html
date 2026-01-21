@@ -63,6 +63,9 @@
                         <i class="fas fa-cart-plus"></i> 500 GR Sepete Ekle
                     </button>
                 </div>
+                <a href="https://www.shopier.com/43330341" target="_blank" style="background-color: #7b27d8; color: white; text-decoration: none; display: block; text-align: center; padding: 12px; border-radius: 5px; font-weight: bold; font-size: 14px; margin-bottom: 8px;">
+                    <i class="fas fa-shopping-bag"></i> Shopier ile Hemen Al
+                </a>
                 <a href="https://ikastaharman.ikas.shop/findikkavrulmus-ve-paketlenmis" target="_blank" style="background-color: #34495e; color: white; text-decoration: none; display: block; text-align: center; padding: 10px; border-radius: 5px; font-weight: bold; font-size: 13px;">
                     <i class="fas fa-credit-card"></i> İkas Kredi Kartı ile Al
                 </a>
@@ -76,6 +79,30 @@
                 <button onclick="sepeteEkle('Kabuklu Fındık', 350)" class="sepete-ekle-btn buy-btn" style="width:100%; border:none; cursor:pointer; background-color: #e67e22; margin-bottom: 8px; color: white; padding: 12px; border-radius: 5px; font-weight: bold;">
                     <i class="fas fa-cart-plus"></i> Sepete Ekle
                 </button>
+                <a href="https://www.shopier.com/43330341" target="_blank" style="background-color: #7b27d8; color: white; text-decoration: none; display: block; text-align: center; padding: 12px; border-radius: 5px; font-weight: bold; font-size: 14px;">
+                    <i class="fas fa-shopping-bag"></i> Shopier ile Hemen Al
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="yorumlar" style="background-color: #fdfaf5; padding: 60px 20px;">
+        <h2 class="section-title">Müşterilerimiz Ne Diyor?</h2>
+        <div class="product-grid">
+            <div class="product-card" style="background: white; border-top: 4px solid #e67e22; text-align: center;">
+                <p style="font-style: italic; color: #555;">"Düzce'den gelen en taze fındık! Kavrulmuş fındığın çıtırlığı harika. Paketleme çok özenliydi."</p>
+                <h4 style="margin-top: 15px; color: #333;">- Ahmet Y.</h4>
+                <div style="color: #f1c40f;">★★★★★</div>
+            </div>
+            <div class="product-card" style="background: white; border-top: 4px solid #e67e22; text-align: center;">
+                <p style="font-style: italic; color: #555;">"Çiğ fındık aldım, taptaze. WhatsApp üzerinden çok hızlı ilgilendiler. Herkese tavsiye ederim."</p>
+                <h4 style="margin-top: 15px; color: #333;">- Fatma K.</h4>
+                <div style="color: #f1c40f;">★★★★★</div>
+            </div>
+            <div class="product-card" style="background: white; border-top: 4px solid #e67e22; text-align: center;">
+                <p style="font-style: italic; color: #555;">"İkas üzerinden kartla güvenle aldım, ertesi gün kargoya verildi. Çok dürüst bir satıcı."</p>
+                <h4 style="margin-top: 15px; color: #333;">- Mehmet T.</h4>
+                <div style="color: #f1c40f;">★★★★★</div>
             </div>
         </div>
     </section>
@@ -125,12 +152,20 @@
             <h3 style="margin:0;">Sepetim</h3>
             <button onclick="sepetiAcKapat()" style="background:none; border:none; font-size:20px; cursor:pointer;">&times;</button>
         </div>
-        <ul id="sepet-listesi" style="list-style: none; padding: 0; max-height: 150px; overflow-y: auto;"></ul>
+        <ul id="sepet-listesi" style="list-style: none; padding: 0; max-height: 150px; overflow-y: auto; text-align: left;"></ul>
         <hr>
-        <input type="text" id="musteri-ad" placeholder="Adınız Soyadınız" style="width: 93%; margin-bottom: 5px; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
-        <textarea id="musteri-adres" placeholder="Teslimat Adresiniz" style="width: 93%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; height: 50px;"></textarea>
+        <div style="margin-bottom: 10px; text-align: left;">
+            <input type="text" id="musteri-ad" placeholder="Adınız Soyadınız" style="width: 93%; margin-bottom: 5px; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+            <textarea id="musteri-adres" placeholder="Teslimat Adresiniz" style="width: 93%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; height: 50px; font-family: sans-serif;"></textarea>
+        </div>
         <p><strong>Toplam: <span id="toplam-tutar">0</span> TL</strong></p>
-        <button onclick="siparisVer()" style="width: 100%; background: #25d366; color: white; border: none; padding: 12px; border-radius: 5px; font-weight: bold; cursor: pointer;">WhatsApp ile Siparişi Tamamla</button>
+        <button onclick="siparisVer()" style="width: 100%; background: #25d366; color: white; border: none; padding: 12px; border-radius: 5px; font-weight: bold; cursor: pointer;">
+            WhatsApp ile Siparişi Tamamla
+        </button>
+    </div>
+
+    <div onclick="sepetiAcKapat()" style="position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; background: #e67e22; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 999;">
+        <i class="fas fa-shopping-basket" style="font-size: 20px;"></i>
     </div>
 
     <footer>
@@ -140,7 +175,11 @@
     <script>
         function sepetiAcKapat() {
             var x = document.getElementById("sepet-penceresi");
-            x.style.display = (x.style.display === "none" || x.style.display === "") ? "block" : "none";
+            if (x.style.display === "none" || x.style.display === "") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
         }
     </script>
     <script src="sepet.js"></script>
