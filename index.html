@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-
     <nav>
         <div class="logo">Fındık<span>Sepeti</span></div>
         <ul class="nav-links">
@@ -16,10 +15,9 @@
             <li><a href="#yorumlar">Yorumlar</a></li>
             <li><a href="#hakkimizda">Hakkımızda</a></li>
             <li><a href="#iletisim">İletişim</a></li>
-            <li id="sepet-menu-item" style="margin-left: 15px; cursor: pointer; display: inline-block;">
-                <a href="javascript:void(0)" style="color: #2d5a27; text-decoration: none; font-size: 18px; font-weight: 600;">
-                    <i class="fas fa-shopping-basket"></i> 
-                    <span style="font-size: 14px; margin-left: 2px;">(<span id="sepet-sayaci-menu">0</span>)</span>
+            <li id="sepet-menu-item" onclick="sepetiAcKapat()" style="background: #e67e22; padding: 5px 15px; border-radius: 20px; margin-left: 10px; cursor: pointer; display: inline-block;">
+                <a href="javascript:void(0)" style="color: white !important; font-weight: bold; text-decoration: none;">
+                    <i class="fas fa-shopping-cart"></i> Sepetim (<span id="sepet-sayaci-menu">0</span>)
                 </a>
             </li>
         </ul>
@@ -67,6 +65,9 @@
                 </div>
                 <a href="https://www.shopier.com/43330341" target="_blank" style="background-color: #7b27d8; color: white; text-decoration: none; display: block; text-align: center; padding: 12px; border-radius: 5px; font-weight: bold; font-size: 14px; margin-bottom: 8px;">
                     <i class="fas fa-shopping-bag"></i> Shopier ile Hemen Al
+                </a>
+                <a href="https://ikastaharman.ikas.shop/findikkavrulmus-ve-paketlenmis" target="_blank" style="background-color: #34495e; color: white; text-decoration: none; display: block; text-align: center; padding: 10px; border-radius: 5px; font-weight: bold; font-size: 13px;">
+                    <i class="fas fa-credit-card"></i> İkas Kredi Kartı ile Al
                 </a>
             </div>
 
@@ -131,9 +132,14 @@
                     <h3 style="color: #2d5a27;"><i class="fas fa-phone-alt"></i> Telefon / WhatsApp</h3>
                     <p>0 (532) 766 91 02</p>
                 </div>
+                <div>
+                    <h3 style="color: #2d5a27;"><i class="fas fa-envelope"></i> E-Posta</h3>
+                    <p>duzcefindik571@gmail.com</p>
+                </div>
             </div>
             <div style="flex: 1; min-width: 300px; background: #fff; padding: 30px; border-radius: 15px; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.05);">
                 <h3>Sorularınız mı var?</h3>
+                <p>Sipariş süreci için bize anında yazabilirsiniz.</p>
                 <a href="https://wa.me/905327669102" style="background-color: #25d366; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; display: inline-block; font-weight: bold; margin-top: 15px;">
                     <i class="fab fa-whatsapp"></i> WhatsApp'tan Sorun
                 </a>
@@ -141,13 +147,16 @@
         </div>
     </section>
 
-    <div id="sepet-penceresi" style="position: fixed; bottom: 20px; right: 20px; width: 320px; background: white; border: 2px solid #e67e22; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); padding: 15px; z-index: 1000;">
-        <h3 style="margin-top:0;">Sepetim</h3>
+    <div id="sepet-penceresi" style="display: none; position: fixed; bottom: 20px; right: 20px; width: 320px; background: white; border: 2px solid #e67e22; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); padding: 15px; z-index: 1000;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <h3 style="margin:0;">Sepetim</h3>
+            <button onclick="sepetiAcKapat()" style="background:none; border:none; font-size:20px; cursor:pointer;">&times;</button>
+        </div>
         <ul id="sepet-listesi" style="list-style: none; padding: 0; max-height: 150px; overflow-y: auto; text-align: left;"></ul>
         <hr>
         <div style="margin-bottom: 10px; text-align: left;">
             <input type="text" id="musteri-ad" placeholder="Adınız Soyadınız" style="width: 93%; margin-bottom: 5px; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
-            <textarea id="musteri-adres" placeholder="Teslimat Adresiniz" style="width: 93%; padding: 8px; border: 1px solid #ddd; border-radius: 8px; height: 50px; font-family: sans-serif;"></textarea>
+            <textarea id="musteri-adres" placeholder="Teslimat Adresiniz" style="width: 93%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; height: 50px; font-family: sans-serif;"></textarea>
         </div>
         <p><strong>Toplam: <span id="toplam-tutar">0</span> TL</strong></p>
         <button onclick="siparisVer()" style="width: 100%; background: #25d366; color: white; border: none; padding: 12px; border-radius: 5px; font-weight: bold; cursor: pointer;">
@@ -155,10 +164,14 @@
         </button>
     </div>
 
+    <div onclick="sepetiAcKapat()" style="position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; background: #e67e22; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 999;">
+        <i class="fas fa-shopping-basket" style="font-size: 20px;"></i>
+    </div>
+
     <footer>
         <p style="text-align: center; padding: 20px;">&copy; 2026 Fındık Sepeti - Demiröz Ailesi. Tüm Hakları Saklıdır.</p>
     </footer>
 
-    <script src="sepet.js"></script>
-</body>
-</html>
+    <script>
+        function sepetiAcKapat() {
+            var x = document.getElementById("se
