@@ -72,8 +72,8 @@ function siparisVer() {
         return;
     }
 
-    // YENİ FORM BİLGİLERİN
-    const formID = "1FAIpQLSckeDlZKUpiSJGDXUlXcWTysxuGuxwZcPc6WaXAJRM4BrJbUQ"; 
+    // YENİ FORM BİLGİLERİ (GÜNCEL: icvx7 formu için)
+    const formID = "1FAIpQLSdKaj53khYkgmzA0rpOf_KLVnbNN8Z2fnVV0bcW4bXGcHzuKA"; 
     const urunDetay = sepet.map(u => `${u.ad} (${u.adet} Adet)`).join(", ");
     const postUrl = `https://docs.google.com/forms/d/e/${formID}/formResponse`;
 
@@ -82,12 +82,12 @@ function siparisVer() {
     gizliForm.action = postUrl;
     gizliForm.target = 'gizli_iframe';
 
-    // BU NUMARALAR SENİN YENİ FORMUYLA EŞLEŞTİ
+    // BU NUMARALARI YENİ FORMUNA GÖRE TEK TEK EŞLEŞTİRDİM:
     const alanlar = {
-        "entry.2069695679": ad,         // Müşteri Ad Soyad
-        "entry.1018861343": adres,      // Adres
-        "entry.1353130456": urunDetay,  // Sipariş Detayı
-        "entry.1983802554": toplam      // Toplam Tutar
+        "entry.2030626359": ad,          // Müşteri Ad Soyad
+        "entry.1221764796": adres,       // ADRES
+        "entry.1441712210": urunDetay,   // Sipariş Detayı
+        "entry.1983944607": toplam       // TOPLAM TUTAR
     };
 
     for (let key in alanlar) {
@@ -98,6 +98,7 @@ function siparisVer() {
         gizliForm.appendChild(input);
     }
 
+    // Görünmez iframe (Sayfa yenilenmeden veriyi göndermek için)
     let iframe = document.getElementById('gizli_iframe');
     if (!iframe) {
         iframe = document.createElement('iframe');
