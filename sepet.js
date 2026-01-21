@@ -7,7 +7,7 @@ function sepeteEkle(ad, fiyat) {
     } else {
         sepet.push({ ad: ad, fiyat: parseInt(fiyat), adet: 1 });
     }
-    sepetiGuncelle();
+    sepetGuncelle(); // İsim standartlaştırıldı
 }
 
 function miktarAzalt(index) {
@@ -16,15 +16,15 @@ function miktarAzalt(index) {
     } else { 
         sepet.splice(index, 1); 
     }
-    sepetiGuncelle();
+    sepetGuncelle();
 }
 
 function miktarArtir(index) {
     sepet[index].adet += 1;
-    sepetiGuncelle();
+    sepetGuncelle();
 }
 
-function sepetiGuncelle() {
+function sepetGuncelle() {
     const liste = document.getElementById("sepet-listesi");
     const toplamEl = document.getElementById("toplam-tutar");
     const sayac = document.getElementById("sepet-sayaci-menu");
@@ -37,12 +37,12 @@ function sepetiGuncelle() {
     sepet.forEach((urun, i) => {
         toplam += (urun.fiyat * urun.adet);
         const li = document.createElement("li");
-        li.style.cssText = "display:flex; justify-content:space-between; align-items:center; padding:10px; border-bottom:1px solid #eee; font-size:14px;";
+        li.style.cssText = "display:flex; justify-content:space-between; align-items:center; padding:10px; border-bottom:1px solid #eee; font-size:14px; color:#333;";
         li.innerHTML = `
             <span><strong>${urun.ad}</strong><br>${urun.fiyat} TL x ${urun.adet}</span> 
             <div style="display:flex; gap:5px;">
-                <button onclick="miktarAzalt(${i})" style="padding:2px 8px;">-</button> 
-                <button onclick="miktarArtir(${i})" style="padding:2px 8px;">+</button>
+                <button onclick="miktarAzalt(${i})" style="padding:2px 8px; cursor:pointer;">-</button> 
+                <button onclick="miktarArtir(${i})" style="padding:2px 8px; cursor:pointer;">+</button>
             </div>`;
         liste.appendChild(li);
     });
@@ -69,16 +69,13 @@ function siparisVer() {
         return;
     }
 
-    // Ürünleri metne dök
     const urunDetay = sepet.map(u => `- ${u.ad} (${u.adet} Adet)`).join("%0A");
 
-    // WhatsApp Mesaj Taslağı
     let mesaj = `*YENİ FINDIK SİPARİŞİ*%0A%0A`;
     mesaj += `*Müşteri:* ${ad}%0A`;
     mesaj += `*Adres:* ${adres}%0A%0A`;
     mesaj += `*Ürünler:*%0A${urunDetay}%0A%0A`;
     mesaj += `*Toplam Tutar:* ${toplam} TL`;
     
-    // Doğrudan WhatsApp'a yönlendir
     window.location.href = `https://wa.me/905327669102?text=${mesaj}`;
 }
