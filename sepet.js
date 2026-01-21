@@ -1,4 +1,3 @@
-// 1. SEPET DEĞİŞKENLERİ VE TEMEL FONKSİYONLAR
 let sepet = [];
 
 function sepeteEkle(ad, fiyat) {
@@ -9,7 +8,6 @@ function sepeteEkle(ad, fiyat) {
         sepet.push({ ad: ad, fiyat: parseInt(fiyat), adet: 1 });
     }
     sepetiGuncelle();
-    console.log("Ürün eklendi:", ad);
 }
 
 function miktarAzalt(index) {
@@ -53,7 +51,6 @@ function sepetiGuncelle() {
     if(sayac) sayac.innerText = sepet.reduce((a, b) => a + b.adet, 0);
 }
 
-// 2. SİPARİŞ VERME (GOOGLE FORMA GÖNDERME) FONKSİYONU
 function siparisVer() {
     const adInput = document.getElementById("musteri-ad");
     const adresInput = document.getElementById("musteri-adres");
@@ -72,49 +69,16 @@ function siparisVer() {
         return;
     }
 
-    // YENİ FORM BİLGİLERİ (GÜNCEL: icvx7 formu için)
-    const formID = "1FAIpQLSdKaj53khYkgmzA0rpOf_KLVnbNN8Z2fnVV0bcW4bXGcHzuKA"; 
-    const urunDetay = sepet.map(u => `${u.ad} (${u.adet} Adet)`).join(", ");
-    const postUrl = `https://docs.google.com/forms/d/e/${formID}/formResponse`;
+    // Ürünleri metne dök
+    const urunDetay = sepet.map(u => `- ${u.ad} (${u.adet} Adet)`).join("%0A");
 
-    const gizliForm = document.createElement('form');
-    gizliForm.method = 'POST';
-    gizliForm.action = postUrl;
-    gizliForm.target = 'gizli_iframe';
-
-    // BU NUMARALARI YENİ FORMUNA GÖRE TEK TEK EŞLEŞTİRDİM:
-    const alanlar = {
-        "entry.2030626359": ad,          // Müşteri Ad Soyad
-        "entry.1221764796": adres,       // ADRES
-        "entry.1441712210": urunDetay,   // Sipariş Detayı
-        "entry.1983944607": toplam       // TOPLAM TUTAR
-    };
-
-    for (let key in alanlar) {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = key;
-        input.value = alanlar[key];
-        gizliForm.appendChild(input);
-    }
-
-    // Görünmez iframe (Sayfa yenilenmeden veriyi göndermek için)
-    let iframe = document.getElementById('gizli_iframe');
-    if (!iframe) {
-        iframe = document.createElement('iframe');
-        iframe.id = 'gizli_iframe';
-        iframe.name = 'gizli_iframe';
-        iframe.style.display = 'none';
-        document.body.appendChild(iframe);
-    }
-
-    document.body.appendChild(gizliForm);
-    gizliForm.submit();
-
-    // WhatsApp Mesajı
-    let mesaj = `*YENİ SİPARİŞ*%0A*Müşteri:* ${ad}%0A*Adres:* ${adres}%0A*Ürünler:* ${urunDetay}%0A*Toplam:* ${toplam} TL`;
+    // WhatsApp Mesaj Taslağı
+    let mesaj = `*YENİ FINDIK SİPARİŞİ*%0A%0A`;
+    mesaj += `*Müşteri:* ${ad}%0A`;
+    mesaj += `*Adres:* ${adres}%0A%0A`;
+    mesaj += `*Ürünler:*%0A${urunDetay}%0A%0A`;
+    mesaj += `*Toplam Tutar:* ${toplam} TL`;
     
-    setTimeout(() => {
-        window.location.href = `https://wa.me/905327669102?text=${mesaj}`;
-    }, 1000);
+    // Doğrudan WhatsApp'a yönlendir
+    window.location.href = `https://wa.me/905327669102?text=${mesaj}`;
 }
