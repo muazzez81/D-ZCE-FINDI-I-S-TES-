@@ -4,22 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fındık Sepeti | Düzce'den Taze ve Doğal Fındık</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* Menüdeki sepet balonu için */
         .sepet-badge {
-            position: absolute;
-            top: -8px;
-            right: -12px;
-            background: #e67e22;
-            color: white;
-            font-size: 11px;
-            padding: 2px 6px;
-            border-radius: 50%;
-            border: 2px solid white;
-            font-weight: bold;
+            position: absolute; top: -8px; right: -12px; background: #e67e22; color: white;
+            font-size: 11px; padding: 2px 6px; border-radius: 50%; border: 2px solid white; font-weight: bold;
         }
+        /* Resimlerin hızlı yüklenmesi için standart boyut */
+        .img-container img { width: 100%; height: auto; display: block; }
+        /* Sayfa geçişlerini yumuşatır */
+        html { scroll-behavior: smooth; }
     </style>
 </head>
 <body>
@@ -54,11 +52,10 @@
     <section id="urunler">
         <h2 class="section-title">Doğal Lezzetlerimiz</h2>
         <div class="product-grid">
-            
             <div class="product-card">
-                <div class="img-container"><img src="findik8.jpg" alt="Çiğ İç Fındık"></div>
+                <div class="img-container"><img src="findik8.jpg" alt="Çiğ İç Fındık" loading="lazy"></div>
                 <h3>Taze Çiğ İç Fındık</h3>
-                <p class="description">Vakumlanmış paketlerde, taptaze doğal iç fındık.</p>
+                <p class="description">Vakumlanmış paketlerde, tazeliğini koruyan doğal iç fındık.</p>
                 <p class="price">450 TL <small>(1 KG)</small></p>
                 <button onclick="sepeteEkle('Taze Çiğ İç Fındık', 450)" class="sepete-ekle-btn buy-btn" style="width:100%; border:none; cursor:pointer; background-color: #2d5a27; margin-bottom: 8px; color: white; padding: 12px; border-radius: 5px; font-weight: bold;">
                     <i class="fas fa-cart-plus"></i> Sepete Ekle
@@ -69,7 +66,7 @@
             </div>
 
             <div class="product-card" style="border: 2px solid #2ecc71; transform: scale(1.02);">
-                <div class="img-container"><img src="findik2.jpg" alt="Kavrulmuş Fındık"></div>
+                <div class="img-container"><img src="findik2.jpg" alt="Kavrulmuş Fındık" loading="lazy"></div>
                 <div style="background: #2ecc71; color: white; font-size: 11px; padding: 4px; text-align: center; border-radius: 4px; margin-bottom: 8px;">POPÜLER ÜRÜN</div>
                 <h3>Çifte Kavrulmuş Fındık</h3>
                 <div style="margin-top: 15px; padding: 10px; background: #f9f9f9; border-radius: 8px;">
@@ -90,7 +87,7 @@
             </div>
 
             <div class="product-card">
-                <div class="img-container"><img src="findik5.jpg" alt="Kabuklu Fındık"></div>
+                <div class="img-container"><img src="findik5.jpg" alt="Kabuklu Fındık" loading="lazy"></div>
                 <h3>Natürel Kabuklu Fındık</h3>
                 <p class="description">En doğal formunda kabuklu fındık.</p>
                 <p class="price">350 TL <small>(1 KG)</small></p>
@@ -104,25 +101,39 @@
         </div>
     </section>
 
-    <section id="yorumlar" style="background-color: #fdfaf5; padding: 60px 20px;">
-        <h2 class="section-title">Müşterilerimiz Ne Diyor?</h2>
-        <div class="product-grid">
-            <div class="product-card" style="background: white; border-top: 4px solid #2d5a27; text-align: center;">
-                <p style="font-style: italic; color: #555;">"Düzce'den gelen en taze fındık! Paketleme çok özenliydi."</p>
-                <h4 style="margin-top: 15px; color: #333;">- Ahmet Y.</h4>
-                <div style="color: #f1c40f;">★★★★★</div>
+    <section id="hakkimizda" style="padding: 80px 10%; background-color: #fff;">
+        <div style="display: flex; align-items: center; gap: 50px; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 300px;">
+                <h2 class="section-title" style="text-align: left;">Hikayemiz</h2>
+                <p><strong>Düzce'nin Sallar Mahallesi'nden DEMİRÖZ ailesi olarak</strong> nesillerdir devam eden fındık tarımı tecrübemizi doğrudan sofranıza sunuyoruz.</p>
+                <p style="line-height: 1.8;">✓ %100 Doğal ve Yeni Mahsul<br>✓ El Emeği İle Seçilmiş Taneler<br>✓ Bahçeden Doğrudan Satış</p>
             </div>
-            <div class="product-card" style="background: white; border-top: 4px solid #2d5a27; text-align: center;">
-                <p style="font-style: italic; color: #555;">"WhatsApp üzerinden çok hızlı ilgilendiler. Tavsiye ederim."</p>
-                <h4 style="margin-top: 15px; color: #333;">- Fatma K.</h4>
-                <div style="color: #f1c40f;">★★★★★</div>
+            <div style="flex: 1; min-width: 300px;">
+                <img src="findik-bahce.jpg" alt="Fındık Bahçemiz" style="width: 100%; border-radius: 15px; box-shadow: 15px 15px 0px #2d5a27;" loading="lazy">
             </div>
         </div>
     </section>
 
     <section id="iletisim" style="padding: 80px 10%; background-color: #f1f1f1;">
-        <h2 class="section-title">İletişim</h2>
-        <p style="text-align: center;">Sallar Mahallesi, Düzce Merkez/Düzce <br> 0 (532) 766 91 02</p>
+        <h2 class="section-title">Bizimle İletişime Geçin</h2>
+        <div style="display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 300px;">
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: #2d5a27;"><i class="fas fa-map-marker-alt"></i> Adresimiz</h3>
+                    <p>Sallar Mahallesi, Düzce Merkez/Düzce</p>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: #2d5a27;"><i class="fas fa-phone-alt"></i> Telefon / WhatsApp</h3>
+                    <p>0 (532) 766 91 02</p>
+                </div>
+            </div>
+            <div style="flex: 1; min-width: 300px; background: #fff; padding: 30px; border-radius: 15px; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.05);">
+                <h3>Sorularınız mı var?</h3>
+                <a href="https://wa.me/905327669102" style="background-color: #25d366; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; display: inline-block; font-weight: bold; margin-top: 15px;">
+                    <i class="fab fa-whatsapp"></i> WhatsApp'tan Sorun
+                </a>
+            </div>
+        </div>
     </section>
 
     <div id="sepet-ikon-butonu" onclick="sepetiAcKapat()" style="position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: #2d5a27; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 1001;">
@@ -135,28 +146,7 @@
             <h3 style="margin:0; color: #2d5a27;">Sepetim</h3>
             <button onclick="sepetiAcKapat()" style="background: none; border: none; font-size: 24px; cursor: pointer; color: #888;">&times;</button>
         </div>
-        <ul id="sepet-listesi" style="list-style: none; padding: 0; max-height: 200px; overflow-y: auto; text-align: left; color: #333;"></ul>
-        <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
-        <div style="margin-bottom: 10px;">
-            <input type="text" id="musteri-ad" placeholder="Adınız Soyadınız" style="width: 100%; margin-bottom: 8px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box;">
-            <textarea id="musteri-adres" placeholder="Teslimat Adresiniz" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; height: 60px; box-sizing: border-box; font-family: sans-serif;"></textarea>
-        </div>
-        <p><strong>Toplam: <span id="toplam-tutar">0</span> TL</strong></p>
-        <button onclick="siparisVer()" style="width: 100%; background: #25d366; color: white; border: none; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer;">
-            <i class="fab fa-whatsapp"></i> Siparişi Tamamla
-        </button>
-    </div>
-
-    <footer>
-        <p style="text-align: center; padding: 20px;">&copy; 2026 Fındık Sepeti - Demiröz Ailesi</p>
-    </footer>
-
-    <script>
-        function sepetiAcKapat() {
-            var x = document.getElementById("sepet-penceresi");
-            x.style.display = (x.style.display === "none") ? "block" : "none";
-        }
-    </script>
-    <script src="sepet.js"></script>
-</body>
-</html>
+        <ul id="sepet-listesi" style="list-style: none; padding: 0; max-height: 200px; overflow-y: auto;"></ul>
+        <hr>
+        <input type="text" id="musteri-ad" placeholder="Adınız Soyadınız" style="width: 100%; margin-bottom: 8px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box;">
+        <textarea id="musteri-adres" placeholder="Teslimat Adresiniz" style="width: 100%; padding: 10px; border: 1px solid #ddd; border
