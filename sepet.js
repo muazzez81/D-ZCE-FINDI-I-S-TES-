@@ -72,7 +72,7 @@ function siparisVer() {
         return;
     }
 
-    // FORM BİLGİLERİ
+    // YENİ FORM BİLGİLERİN
     const formID = "1FAIpQLSckeDlZKUpiSJGDXUlXcWTysxuGuxwZcPc6WaXAJRM4BrJbUQ"; 
     const urunDetay = sepet.map(u => `${u.ad} (${u.adet} Adet)`).join(", ");
     const postUrl = `https://docs.google.com/forms/d/e/${formID}/formResponse`;
@@ -82,12 +82,12 @@ function siparisVer() {
     gizliForm.action = postUrl;
     gizliForm.target = 'gizli_iframe';
 
-    // SENİN FORMUNDAKİ GÜNCEL ENTRY NUMARALARI
+    // BU NUMARALAR SENİN YENİ FORMUYLA EŞLEŞTİ
     const alanlar = {
         "entry.2069695679": ad,         // Müşteri Ad Soyad
         "entry.1018861343": adres,      // Adres
         "entry.1353130456": urunDetay,  // Sipariş Detayı
-        "entry.1983802554": toplam       // Toplam Tutar
+        "entry.1983802554": toplam      // Toplam Tutar
     };
 
     for (let key in alanlar) {
@@ -98,7 +98,6 @@ function siparisVer() {
         gizliForm.appendChild(input);
     }
 
-    // Görünmez iframe (Sayfa yenilenmeden veriyi göndermek için)
     let iframe = document.getElementById('gizli_iframe');
     if (!iframe) {
         iframe = document.createElement('iframe');
