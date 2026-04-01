@@ -215,3 +215,23 @@ footer { background: #333; color: white; text-align: center; padding: 20px; marg
 .img-container:hover img {
     transform: scale(1.15); /* Fareyle üzerine gelince %15 büyütür */
 }
+.velora-sign{
+    text-align:center;
+    margin:40px 0;
+}
+
+.velora-sign a{
+    color:#ffffff; /* BEYAZ */
+    font-size:14px;
+    text-decoration:none;
+    font-weight:500;
+    letter-spacing:1px;
+    opacity:0.85;
+    transition:0.4s;
+}
+
+.velora-sign a:hover{
+    color:#ffffff;
+    opacity:1;
+    text-shadow:0 0 12px rgba(255,255,255,0.9);
+}
